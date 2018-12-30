@@ -21,27 +21,27 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 configMapKeyRef:
-                  name: concourse-postgres
+                  name: concourse-postgresql
                   key: postgres-user
             - name: PGUSER
               valueFrom:
                 configMapKeyRef:
-                  name: concourse-postgres
+                  name: concourse-postgresql
                   key: pguser
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
-                  name: concourse-postgres
+                  name: concourse-postgresql
                   key: postgres-db
             - name: POSTGRES_INITDB_ARGS
               valueFrom:
                 configMapKeyRef:
-                  name: concourse-postgres
+                  name: concourse-postgresql
                   key: postgres-initdb-args
             - name: PGDATA
               valueFrom:
                 configMapKeyRef:
-                  name: concourse-postgres
+                  name: concourse-postgresql
                   key: pgdata
             - name: POSTGRES_PASSWORD
               valueFrom:
