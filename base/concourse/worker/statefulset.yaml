@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: concourse-worker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: concourse-worker
+  serviceName: concourse-worker
+  template:
+    metadata:
+      labels:
+        app: concourse-worker
+    spec:
+      containers:
+        - name: concourse-worker
+          image: "concourse/concourse:4.2.2"
+          imagePullPolicy: IfNotPresent
+          args:
+            - worker
+          env:
+            - name: CONCOURSE_WORK_DIR
+              value: "/concourse-work-dir"
+            - name: CONCOURSE_TSA_HOST
+              value: "concourse-web:2222"
+            - name: CONCOURSE_TSA_PUBLIC_KEY
+              value: "/concourse-keys/worker_key"
+            - name: CONCOURSE_GARDEN_BIND_PORT
+              value: "7777"
+            - name: CONCOURSE_BAGGAGECLAIM_DRIVER
+              valueFrom:
+                configMapKeyRef:
+                  key: baggageclaim-driver
+                  name: concourse-worker
+            - name: CONCOURSE_EPHEMERAL
+              valueFrom:
+                configMapKeyRef:
+                  key: ephemeral
+                  name: concourse-worker
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - mountPath: /concourse-keys
+              name: concourse-keys
+              readOnly: true
+            - mountPath: /concourse-work-dir
+              name: concourse-work-dir
+      volumes:
+        - name: concourse-keys
+          secret:
+            secretName: concourse-web
+            defaultMode: 0400
+            items:
+            - key: host-key-pub
+              path: host_key.pub
+            - key: worker-key
+              path: worker_key
+            - key: worker-key-pub
+              path: worker_key.pub
+        - name: concourse-work-dir
+          hostPath:
+            path: /tmp/concourse-work-dir
+            type: DirectoryOrCreate
+  updateStrategy:
+    type: RollingUpdate
+  podManagementPolicy: Parallel

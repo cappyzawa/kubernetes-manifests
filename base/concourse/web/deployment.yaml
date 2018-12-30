@@ -58,8 +58,6 @@ spec:
                 configMapKeyRef:
                   key: postgres-db
                   name: concourse-postgresql
-            - name: CONCOURSE_KUBERNETES_IN_CLUSTER
-              value: "true"
             - name: CONCOURSE_SESSION_SIGNING_KEY
               value: "/concourse-keys/session_signing_key"
             - name: CONCOURSE_MAIN_TEAM_LOCAL_USER
@@ -70,8 +68,6 @@ spec:
               value: "/concourse-keys/host_key"
             - name: CONCOURSE_TSA_AUTHORIZED_KEYS
               value: "/concourse-keys/worker_key.pub"
-            - name: CONCOURSE_TSA_LOG_LEVEL
-              value: "error"
           ports:
             - containerPort: 8080
               name: atc

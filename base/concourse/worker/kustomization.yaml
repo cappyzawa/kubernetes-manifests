@@ -1,0 +1,5 @@
+resources:
+- configmap.yaml
+- policy.yaml
+- service.yaml
+- statefulset.yaml

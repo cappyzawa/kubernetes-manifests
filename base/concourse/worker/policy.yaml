@@ -1,0 +1,11 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: concourse-worker
+  labels:
+    app: concourse-worker
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: concourse-worker
