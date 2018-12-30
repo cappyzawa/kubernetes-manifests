@@ -48,6 +48,10 @@ spec:
                 secretKeyRef:
                   key: postgres-password
                   name: concourse-postgresql
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
           ports:
             - containerPort: 5432
               name: postgresql
