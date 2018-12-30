@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: concourse-postgresql
   labels:
-    app: postgres
+    app: concourse-postgresql
 data:
   postgres-db: "concourse"
