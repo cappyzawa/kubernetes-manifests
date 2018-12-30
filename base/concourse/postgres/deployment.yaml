@@ -19,15 +19,30 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: POSTGRES_USER
-              value: "concourse"
+              valueFrom:
+                configMapKeyRef:
+                  name: concourse-postgres
+                  key: postgres-user
             - name: PGUSER
-              value: "concourse"
+              valueFrom:
+                configMapKeyRef:
+                  name: concourse-postgres
+                  key: pguser
             - name: POSTGRES_DB
-              value: "concourse"
+              valueFrom:
+                configMapKeyRef:
+                  name: concourse-postgres
+                  key: postgres-db
             - name: POSTGRES_INITDB_ARGS
-              value: ""
+              valueFrom:
+                configMapKeyRef:
+                  name: concourse-postgres
+                  key: postgres-initdb-args
             - name: PGDATA
-              value: /var/lib/postgresql/data/pgdata
+              valueFrom:
+                configMapKeyRef:
+                  name: concourse-postgres
+                  key: pgdata
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:

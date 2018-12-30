@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: concourse-postgres
+  labels:
+    app: postgres
+data:
+  postgres-user: concourse
+  postgres-db: concourse
+  postgres-initdb-args: ""
+  pguser: concourse
+  pgdata: /var/lib/postgresql/data/pgdata
