@@ -40,10 +40,7 @@ spec:
                   key: external-url
                   name: concourse-web
             - name: CONCOURSE_POSTGRES_HOST
-              valueFrom:
-                configMapKeyRef:
-                  key: postgres-host
-                  name: concourse-web
+              value: concourse-postgresql
             - name: CONCOURSE_POSTGRES_PORT
               value: "5432"
             - name: CONCOURSE_POSTGRES_USER

@@ -5,5 +5,5 @@ metadata:
   labels:
     app: concourse-web
 data:
-  postgres-host: "10.107.145.4"
+#  postgres-host: "10.107.145.4"
   external-url: "http://localhost:8080"
