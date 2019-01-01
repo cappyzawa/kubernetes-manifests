@@ -1,0 +1,4 @@
+bases:
+  - postgres/overlays
+  - web/overlays
+  - worker/overlays
