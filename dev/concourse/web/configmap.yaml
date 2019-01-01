@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: concourse-web
+  labels:
+    app: concourse-web
+data:
+#  postgres-host: "10.107.145.4"
+  external-url: "http://localhost:8080"

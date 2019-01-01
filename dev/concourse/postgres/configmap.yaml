@@ -1,9 +1,8 @@
 apiVersion: v1
-kind: Secret
+kind: ConfigMap
 metadata:
   name: concourse-postgresql
   labels:
     app: concourse-postgresql
-type: Opaque
 data:
-  postgres-password: "Y29uY291cnNlCg=="
+  postgres-db: "concourse"

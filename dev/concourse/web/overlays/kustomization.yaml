@@ -1,0 +1,4 @@
+bases:
+- ../../../../base/concourse/web
+patches:
+- ../configmap.yaml
