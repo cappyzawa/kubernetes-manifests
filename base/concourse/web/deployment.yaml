@@ -26,8 +26,8 @@ spec:
             - name: CONCOURSE_ADD_LOCAL_USER
               valueFrom:
                 secretKeyRef:
-                  name: concourse-web
                   key: local-users
+                  name: concourse-web
             - name: POD_IP
               valueFrom:
                 fieldRef:
@@ -58,6 +58,11 @@ spec:
                 configMapKeyRef:
                   key: postgres-db
                   name: concourse-postgresql
+            - name: CONCOURSE_ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: encryption-key
+                  name: concourse-web
             - name: CONCOURSE_SESSION_SIGNING_KEY
               value: "/concourse-keys/session_signing_key"
             - name: CONCOURSE_MAIN_TEAM_LOCAL_USER
