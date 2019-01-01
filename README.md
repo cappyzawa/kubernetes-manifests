@@ -5,6 +5,7 @@ kubernetes-manifests for me
 ### generate secretes
 ```bash
 $ ./scripts/gen-secret-postgredql.sh
+$ ./scripts/gen-secret-web.sh
 $ ./scripts/gen-secret-concourse.sh
 ```
 ### deploy(with kustomize)
