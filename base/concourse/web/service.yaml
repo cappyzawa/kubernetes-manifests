@@ -5,13 +5,15 @@ metadata:
   labels:
     app: concourse-web
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 8080
       name: atc
+      protocol: TCP
       targetPort: atc
     - port: 2222
       name: tsa
+      protocol: TCP
       targetPort: tsa
   selector:
     app: concourse-web

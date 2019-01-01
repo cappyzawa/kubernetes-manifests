@@ -3,3 +3,4 @@ resources:
 - policy.yaml
 - service.yaml
 - statefulset.yaml
+- rbac.yaml

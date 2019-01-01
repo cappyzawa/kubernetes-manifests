@@ -7,3 +7,4 @@ metadata:
 data:
   baggageclaim-driver: btrfs
   ephemeral: "false"
+  log-level: info

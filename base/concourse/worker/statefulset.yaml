@@ -3,28 +3,35 @@ kind: StatefulSet
 metadata:
   name: concourse-worker
 spec:
+  serviceName: concourse-worker
   replicas: 2
   selector:
     matchLabels:
       app: concourse-worker
-  serviceName: concourse-worker
   template:
     metadata:
       labels:
         app: concourse-worker
     spec:
+      serviceAccountName: concourse-worker
+      tolerations: []
+      terminationGracePeriodSeconds: 60
       containers:
         - name: concourse-worker
           image: "concourse/concourse:4.2.2"
           imagePullPolicy: IfNotPresent
           args:
             - worker
+            - |
+              --name=${HOSTNAME}
           env:
             - name: CONCOURSE_WORK_DIR
               value: "/concourse-work-dir"
             - name: CONCOURSE_TSA_HOST
               value: "concourse-web:2222"
             - name: CONCOURSE_TSA_PUBLIC_KEY
+              value: "/concourse-keys/host_key.pub"
+            - name: CONCOURSE_TSA_WORKER_PRIVATE_KEY
               value: "/concourse-keys/worker_key"
             - name: CONCOURSE_GARDEN_BIND_PORT
               value: "7777"
@@ -38,6 +45,16 @@ spec:
                 configMapKeyRef:
                   key: ephemeral
                   name: concourse-worker
+            - name: CONCOURSE_LOG_LEVEL
+              valueFrom:
+                configMapKeyRef:
+                  key: log-level
+                  name: concourse-worker
+            - name: CONCOURSE_GARDEN_LOG_LEVEL
+              value: $(CONCOURSE_LOG_LEVEL)
+            - name: CONCOURSE_BAGGAGECLAIM_LOG_LEVEL
+              value: $(CONCOURSE_LOG_LEVEL)
+            
           resources:
             requests:
               cpu: 100m
@@ -53,7 +70,7 @@ spec:
       volumes:
         - name: concourse-keys
           secret:
-            secretName: concourse-web
+            secretName: concourse
             defaultMode: 0400
             items:
             - key: host-key-pub

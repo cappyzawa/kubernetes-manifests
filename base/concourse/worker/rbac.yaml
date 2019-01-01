@@ -1,0 +1,37 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  name: concourse-worker
+  labels:
+    app: concourse-worker
+rules:
+  - verbs:
+      - use
+    apiGroups:
+      - extensions
+    resources:
+      - podsecuritypolicies
+    resourceNames:
+      - privileged
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: concourse-worker
+  labels:
+    app: concourse-worker
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: concourse-worker
+subjects:
+  - kind: ServiceAccount
+    name: concourse-worker
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: concourse-worker
+  labels:
+    app: concourse-worker
