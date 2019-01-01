@@ -73,6 +73,12 @@ spec:
               name: atc
             - containerPort: 2222
               name: tsa
+          livenessProbe:
+            httpGet:
+              port: atc
+              path: /
+            initialDelaySeconds: 120
+            timeoutSeconds: 5
           resources:
             requests:
               cpu: 100m
