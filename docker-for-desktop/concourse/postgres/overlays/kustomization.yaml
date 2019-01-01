@@ -1,5 +1,0 @@
-bases:
-  - ../../../../base/concourse/postgres
-patches:
-  - ../secret.yaml
-  - ../configmap.yaml

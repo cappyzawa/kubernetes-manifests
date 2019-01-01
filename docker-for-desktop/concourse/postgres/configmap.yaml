@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: concourse-postgresql
-  labels:
-    app: concourse-postgresql
-data:
-  postgres-db: "concourse"

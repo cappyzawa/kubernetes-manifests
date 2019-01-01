@@ -1,5 +1,0 @@
-bases:
-- ../../../../base/concourse/worker
-patches:
-- ../configmap.yaml
-- ../statefulset.yaml
