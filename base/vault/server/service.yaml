@@ -5,6 +5,7 @@ metadata:
   labels:
     app: vault
 spec:
+  type: ClusterIP
   ports:
     - port: 8200
       name: vault
