@@ -1,0 +1,4 @@
+bases:
+- ../../../../base/vault/server
+patches:
+- ../configmap.yaml
