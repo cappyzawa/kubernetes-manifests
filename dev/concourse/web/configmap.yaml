@@ -7,3 +7,7 @@ metadata:
 data:
 #  postgres-host: "10.107.145.4"
   external-url: "http://localhost:8080"
+  vault-host: vault
+  vault-port: "8200"
+  vault-auth-backend: approle
+  vault-insecure-skip-verify: "true"

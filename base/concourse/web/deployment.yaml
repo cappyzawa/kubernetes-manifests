@@ -8,7 +8,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: concourse-apweb
+      app: concourse-web
   template:
     metadata:
       labels:
@@ -20,6 +20,11 @@ spec:
           imagePullPolicy: IfNotPresent
           args:
             - web
+#            TODO:
+#            - --vault-auth-param
+#            - role_id=$(VAULT_ROLE_ID)
+#            - --vault-auth-param
+#            - secret_id=$(VAULT_SECRET_ID)
           env:
             - name: CONCOURSE_BIND_PORT
               value: "8080"
@@ -73,6 +78,39 @@ spec:
               value: "/concourse-keys/host_key"
             - name: CONCOURSE_TSA_AUTHORIZED_KEYS
               value: "/concourse-keys/worker_key.pub"
+#            TODO:
+#            - name: VAULT_HOST
+#              valueFrom:
+#                configMapKeyRef:
+#                  key: vault-host
+#                  name: concourse-web
+#            - name: VAULT_PORT
+#              valueFrom:
+#                configMapKeyRef:
+#                  key: vault-port
+#                  name: concourse-web
+#            - name: CONCOURSE_VAULT_URL
+#              value: http://$(VAULT_HOST):$(VAULT_PORT)
+#            - name: CONCOURSE_VAULT_INSECURE_SKIP_VERIFY
+#              valueFrom:
+#                configMapKeyRef:
+#                  key: vault-insecure-skip-verify
+#                  name: concourse-web
+#            - name: CONCOURSE_VAULT_AUTH_BACKEND
+#              valueFrom:
+#                configMapKeyRef:
+#                  key: vault-auth-backend
+#                  name: concourse-web
+#            - name: VAULT_ROLE_ID
+#              valueFrom:
+#                secretKeyRef:
+#                  key: vault-role-id
+#                  name: concourse-vault
+#            - name: VAULT_SECRET_ID
+#              valueFrom:
+#                secretKeyRef:
+#                  key: vault-secret-id
+#                  name: concourse-vault
           ports:
             - containerPort: 8080
               name: atc
