@@ -78,6 +78,16 @@ spec:
               value: "/concourse-keys/host_key"
             - name: CONCOURSE_TSA_AUTHORIZED_KEYS
               value: "/concourse-keys/worker_key.pub"
+            - name: CONCOURSE_PROMETHEUS_BIND_IP
+              valueFrom:
+                configMapKeyRef:
+                  key: prometheus-bind-ip
+                  name: concourse-web
+            - name: CONCOURSE_PROMETHEUS_BIND_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: prometheus-bind-port
+                  name: concourse-web
 #            TODO:
 #            - name: VAULT_HOST
 #              valueFrom:
@@ -116,6 +126,8 @@ spec:
               name: atc
             - containerPort: 2222
               name: tsa
+            - containerPort: 9391
+              name: prometheus
           livenessProbe:
             httpGet:
               port: atc

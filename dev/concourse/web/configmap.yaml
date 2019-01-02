@@ -11,3 +11,5 @@ data:
   vault-port: "8200"
   vault-auth-backend: approle
   vault-insecure-skip-verify: "true"
+  prometheus-bind-ip: "0.0.0.0"
+  prometheus-bind-port: "9391"
