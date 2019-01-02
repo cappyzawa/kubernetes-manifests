@@ -88,6 +88,16 @@ spec:
                 configMapKeyRef:
                   key: prometheus-bind-port
                   name: concourse-web
+            - name: CONCOURSE_RESOURCE_CHECKING_INTERVAL
+              valueFrom:
+                configMapKeyRef:
+                  key: resource-checking-interval
+                  name: concourse-web
+            - name: CONCOURSE_RESOURCE_TYPE_CHECKING_INTERVAL
+              valueFrom:
+                configMapKeyRef:
+                  key: resource-type-checking-interval
+                  name: concourse-web
 #            TODO:
 #            - name: VAULT_HOST
 #              valueFrom:

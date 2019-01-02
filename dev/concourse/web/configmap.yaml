@@ -13,3 +13,5 @@ data:
   vault-insecure-skip-verify: "true"
   prometheus-bind-ip: "0.0.0.0"
   prometheus-bind-port: "9391"
+  resource-checking-interval: 12h
+  resource-type-checking-interval: 12h
