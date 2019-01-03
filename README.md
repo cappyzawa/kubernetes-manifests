@@ -34,3 +34,7 @@ $ kubectl port-forward svc/vault 8200:8200
 ```bash
 $ kustomize build dev/prometheus/overlays | kubectl apply -f -
 ```
+### view from local
+```bash
+$ kubectl port-forward svc/prometheus 9090:9090
+```
