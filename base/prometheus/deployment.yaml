@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  labels:
+    app: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      containers:
+        - name: prometheus-server-configmap-reload
+          image: prom/prometheus:v2.6.0
+          args:
+            - '--config.file=/etc/prometheus/prometheus.yml'
+            - '--storage.tsdb.path=/prometheus'
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: 500m
+          ports:
+            - containerPort: 9090
+              name: prometheus
+          volumeMounts:
+            - mountPath: /etc/prometheus
+              name: prometheus-volume
+            - mountPath: /prometheus
+              name: prometheus-data
+          securityContext:
+            runAsUser: 0
+      volumes:
+        - name: prometheus-volume
+          configMap:
+            name: prometheus
+            items:
+              - key: prometheus.yml
+                path: prometheus.yml
+        - name: prometheus-data
+          hostPath:
+            path: /tmp/prometheus
+            type: DirectoryOrCreate
